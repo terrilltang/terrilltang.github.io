@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>TERRILLTANG'S BLOG</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Space+Mono|Ubuntu+Mono" rel="stylesheet">
+  <link rel="stylesheet" href="./vendor/style.css">
+</head>
+
+<body>
+  <main>
+    <aside v-bind:class='{show:showMenu}'>
+      <h1>Article Links</h1>
+      <router-link to="/[译] Angular 路由动画教程.html">[译] Angular 路由动画教程</router-link>
+      <router-link to="/[译] 在 Angular 中使用 HammerJS (触措手势).html">[译] 在 Angular 中使用 HammerJS (触措手势)</router-link>
+    </aside>
+    <section>
+      <nav>
+        <a href="#" @click='toggleMenu($event)'>Menu</a>
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About ME</router-link>
+        <a href="https://github.com/terrilltang/terrilltang.github.io">Contact or Star</a>
+      </nav>
+      <router-view></router-view>
+    </section>
+  </main>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="./vendor/highlight.pack.js"></script>
+<script src="./vendor/app.js"></script>
+
+</html>

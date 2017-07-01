@@ -1,0 +1,215 @@
+@import 'nib';
+$color-primary=green;
+$color-accent=grey;
+$color-warn=pink;
+$color-foreground=black;
+$color-background=white;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+a{
+  color:$color-primary;
+}
+
+ul,ol,li{
+  margin-left:10px;
+  padding-left:10px;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  display: fixed;
+  overflow: hidden;
+  main {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    aside {
+      background: $color-background;
+      margin-left: -300px;
+      width: 300px;
+      padding: 0 15px 15px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      border-right: 1px solid lightness($color-accent, 90%);
+      transition: margin-left 0.2s;
+      &.show {
+        margin-left: 0;
+      }
+      h1 {
+        line-height: 2;
+        color: $color-primary;
+      }
+      span,
+      a,
+      router-link {
+        display: inline-block;
+        width: 100%;
+        font-size: 16px;
+        line-height: 2;
+        color: $color-accent;
+        text-decoration: none;
+        ellipsis();
+        &:hover {
+          color: $color-primary;
+          cursor: pointer;
+        }
+      }
+    }
+    section {
+      flex: 1;
+      padding: 0 30px 50px;
+      background: darken($color-background, 1%);
+      font-size: 16px;
+      color: lightness($color-foreground, 40);
+      line-height: 2;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      nav {
+        router-link,
+        a {
+          line-height: 2;
+          color: $color-primary;
+          text-decoration: none;
+          margin-right: 20px;
+        }
+      }
+      article{
+        margin-top:20px;
+        h1{
+          color:$color-foreground;
+        }
+      }
+    }
+  }
+}
+
+.markdown {
+  padding: 15px 0;
+  display: block;
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 3;
+    color: $color-foreground;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  a{
+    color:$color-accent;
+  }
+  p {
+    font-size: 16px;
+    color: lightness($color-foreground, 40%);
+    line-height: 2;
+    margin: 12px auto;
+  }
+  blockquote{
+    border-left:4px solid $color-primary;
+    padding-left:8px;
+  }
+  i,em{
+    color:$color-primary;
+  }
+  pre {
+    background: lightness($color-accent, 96%);
+    padding: 10px 20px;
+    margin: 15px auto;
+    line-height: 1.3;
+    code {
+      font-family: monospace;
+      font-size:14px;
+      color: lightness($color-foreground, 30%);
+      /*
+      Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
+      */
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+      }
+      .hljs,
+      .hljs-subst {
+        color:lightness($color-primary,30%);
+      }
+      .hljs-comment {
+        color:lightness($color-background,75);
+      }
+      .hljs-keyword,
+      .hljs-attribute,
+      .hljs-selector-tag,
+      .hljs-meta-keyword,
+      .hljs-doctag,
+      .hljs-name {
+        color:darken($color-warn,20%);
+        font-weight: bold;
+      }
+      /* User color: hue: 0 */
+      .hljs-type,
+      .hljs-string,
+      .hljs-number,
+      .hljs-selector-id,
+      .hljs-selector-class,
+      .hljs-quote,
+      .hljs-template-tag,
+      .hljs-deletion {
+        color:darken($color-primary,30%);
+      }
+      .hljs-title,
+      .hljs-section {
+        color:lightness($color-warn,30%); 
+        font-weight: bold;
+      }
+      .hljs-regexp,
+      .hljs-symbol,
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-link,
+      .hljs-selector-attr,
+      .hljs-selector-pseudo {
+        color:$color-warn;
+      }
+      /* Language color: hue: 90; */
+      .hljs-literal {
+        color:lighten($color-foreground,30);
+      }
+      .hljs-built_in,
+      .hljs-bullet,
+      .hljs-code,
+      .hljs-addition {
+        color:lightness($color-background,10);
+      }
+      /* Meta color: hue: 200 */
+      .hljs-meta {
+        color:$color-primary;
+      }
+      .hljs-meta-string {
+        color:lighten($color-primary,20);
+      }
+      /* Misc effects */
+      .hljs-emphasis {
+        font-style: italic;
+      }
+      .hljs-strong {
+        font-weight: bold;
+      }
+    }
+  }
+}
