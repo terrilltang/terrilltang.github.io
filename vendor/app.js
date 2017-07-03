@@ -17,8 +17,10 @@ var Article = {
     this.fetchData();
   },
   updated() {
-    document.title=this.$route.params.id;
+    document.title = this.$route.params.id;
     document.querySelectorAll('pre code').forEach(function (block) {
+      console.log(block.attributes)
+      block.setAttribute('type',block.classList[0].replace('lang-',''))
       hljs.highlightBlock(block);
     })
   },
@@ -40,7 +42,12 @@ var Article = {
 
 }
 var Home = {
-  template: '<h2>Welcome to Terrill\'s Personal Tech Blog!</h2>'
+  template: `<h2>
+              Welcome to Terrill\'s Personal Tech Blog! <br/>
+              click <a href="#" @click='app.toggleMenu($event)'>Menu</a> to view article... <br/>
+              <a href="https://github.com/terrilltang">Learn & star my other project</a>
+            </h2>`
+
 }
 var About = {
   template: '<h2>about me</h2>'

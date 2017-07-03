@@ -1,0 +1,649 @@
+<h3 id="angular-">Angular 用户注册和登录教程和示例</h3>
+<blockquote>
+<p>原作者的示例在Angular 2.x / 4.x 版本中都可以跑的通，所以以下文章中 Angular 代表 Angular 2.x / 4.x, AngularJS 代表 Angular 1.x;</p>
+</blockquote>
+<p>4/27/2017---为 Webpack 和 SystemJS 版本示例更新 Angular 版本到 <strong>Angular 4.1.0</strong></p>
+<p>在我（原文作者）的上一篇文章 “如何<a href="http://jasonwatmore.com/post/2015/03/10/angularjs-user-registration-and-login-example-tutorial">使用 AngularJS 创建用户注册和登录</a>” 获得大量乐趣后，Angular 在最近也终于已经发布，是时候发布一个最新的示例教程，使用 Angular 和 TypeScript.</p>
+<p>项目代码可以在 GitHub 上获取： <a href="https://github.com/cornflourblue/angular2-registration-login-example">https://github.com/cornflourblue/angular2-registration-login-example</a>.</p>
+<p>GitHub 上还有一个 Webpack 版本的示例：<a href="https://github.com/cornflourblue/angular2-registration-login-example-webpack">https://github.com/cornflourblue/angular2-registration-login-example-webpack</a></p>
+<p>示例中使用了 HTML5 本地存储来伪造后端存储，切换使用真正的 web 服务，只需要在 app.module.ts 文件中移除注释 ” // 用来创建伪后端的服务提供商 “  下面的代码。</p>
+<p>(查看示例代码： <a href="http://plnkr.co/edit/tg25kr?p=preview">http://plnkr.co/edit/tg25kr?p=preview</a>)</p>
+<p>更新历史：</p>
+<ul>
+<li>27/4/2017 - 为 Webpack 和 SystemJS 版本的两个示例更新 Angular 到 Angular 4.1.0</li>
+<li>16/3/2017 - 创建一个 Webpack 版本的示例 <a href="https://github.com/cornflourblue/angular2-registration-login-example-webpack"> Webpack version on github </a></li>
+<li>16/3/2017 - 更新到 Angular 2.4.9</li>
+<li>24/2/2017 - 使用真正后端接口服务的同样的示例 <a href="http://jasonwatmore.com/post/2017/02/22/mean-with-angular-2-user-registration-and-login-example-tutorial">MEAN with Angular 2 - User Registration and Login Example &amp; Tutorial</a></li>
+<li>8/12/2016 - 更新权限守护和登录组件让用户在登录后跳转回上一个或者最初的地址</li>
+<li>19/11/2016 - 更新至 Angular 2.2.1</li>
+</ul>
+<h3 id="-angular-">本地运行 Angular 用户注册和登录示例</h3>
+<p>这个版本的示例使用 SystemJS 做为模块加载器</p>
+<p>1，从 <a href="https://nodejs.org/en/download">https://nodejs.org/en/download</a> 安装 NodeJS (&gt; v4) and NPM (&gt; v3) ，你可以通过命令行运行 node -v 和 npm -v 来检测你的安装版本</p>
+<p>2，下载项目源代码 <a href="https://github.com/cornflourblue/angular2-registration-login-example">https://github.com/cornflourblue/angular2-registration-login-example</a></p>
+<p>3，在项目的根目录 ( 项目的 package.json 所在的目录 )，通过命令行运行 npm install 命令来安装需要的 npm 模块</p>
+<p>4， 在项目的根目录，通过命令行运行 npm start 运行应用程序</p>
+<h3 id="-webpack-">本地运行此项目的 Webpack 版本示例</h3>
+<p>这个版本的示例使用了 Webpack 来打包 Angular 模块到一起，并且完成其它构建任务，结构是基于 Angular 官方的文档介绍 <a href="https://angular.io/docs/ts/latest/guide/webpack.html">Angular Webpack 介绍</a></p>
+<p>在这个示例中使用 Webpack Dev Server 来做为本地的 web 服务器</p>
+<p>1，从 <a href="https://nodejs.org/en/download">https://nodejs.org/en/download</a> 安装 NodeJS (&gt; v4) and NPM (&gt; v3) ，你可以通过命令行运行 node -v 和 npm -v 来检测你的安装版本</p>
+<p>2，下载项目源代码 <a href="https://github.com/cornflourblue/angular2-registration-login-example">https://github.com/cornflourblue/angular2-registration-login-example</a></p>
+<p>3，在项目的根目录 ( 项目的 package.json 所在的目录 )，通过命令行运行 npm install 命令来安装需要的 npm 模块</p>
+<p>4， 在项目的根目录，通过命令行运行 npm start 运行应用程序</p>
+<p>5，浏览器中输入 <a href="http://localhost:8080">http://localhost:8080</a> 测试查看应用</p>
+<p>注意：在项目的根目录运行 npm run build 命令打包输出用于生产模式的优化过的代码到 ”/dist&quot; 目录，你可以通过在 &quot;/dist&quot; 目录运行一个简单的 node http 服务来测试运行生产模式应用，至于如何操作运行的说明，可以查看：<a href="http://jasonwatmore.com/post/2016/06/22/nodejs-setup-simple-http-server-local-web-server">NodeJS - Setup a Simple HTTP Server / Local Web Server</a>.</p>
+<h3 id="angular-">Angular 项目结构</h3>
+<p>我使用 Angular 快速起步项目做为项目的基础，它使用了 TypeScript 编写并且使用 systemjs 加载模块，如果你是使用 Angular 的新用户，我建议您查看快速启动，因为它提供了本文中未涵盖的项目工具和配置文件的详细信息。</p>
+<p>项目和代码结构尽可能的遵循官方提供的 Angular 风格指南中的建议，以及我自己在项目中一些地方做的一些调整。</p>
+<p>每个功能都有自己的文件夹（home＆login），其他代码如 services ，models ，guards 等都放在带有下划线的文件夹中，以便轻松区分它们，并将它们分组在文件夹结构的顶部。</p>
+<p>以下是项目目录结构：</p>
+<pre><code class="lang-typescript">|- app
+    |- _directives
+        |- alert.component.html
+        |- alert.component.ts
+        |- index.ts
+    |- _guards
+        |- auth.guard.ts
+        |- index.ts
+    |- _helpers
+        |- fake-backend.ts
+        |- index.ts
+    |- _models
+        |- user.ts
+        |- index.ts
+    |- _services
+        |- alert.service.ts
+        |- authentication.service.ts
+        |- index.ts
+        |- user.service.ts
+    |- home
+        |- home.component.html
+        |- home.component.ts
+        |- index.ts
+    |- login
+        |- index.ts
+        |- login.component.html
+        |- login.component.ts
+    |- register
+        |- index.ts
+        |- register.component.html
+        |- register.component.ts
+    |- app.component.html
+    |- app.component.ts
+    |- app.module.ts
+    |- app.routing.ts
+    |- main.ts
+|- app.css
+|- index.html
+|- package.json
+|- system.config.js
+|- tsconfig.json
+</code></pre>
+<p>以下是示例应用主要文件的简要描述以及代码，所有的文件都可以在文章顶部项目的 Github 地址中找到。 </p>
+<h3 id="angular-">Angular 警告组件模板</h3>
+<p>路径：/app/_directives/alert.component.html</p>
+<p>警告组件模板包含了显示在页面顶部显示的警告信息的 html 元素</p>
+<pre><code class="lang-typescript">&lt;div *ngIf=&quot;message&quot; [ngClass]=&quot;{ &#39;alert&#39;: message, &#39;alert-success&#39;: message.type === &#39;success&#39;, &#39;alert-danger&#39;: message.type === &#39;error&#39; }&quot;&gt;{{message.text}}&lt;/div&gt;
+</code></pre>
+<h3 id="angular-">Angular 警告组件</h3>
+<p>路径：/app/_directives/alert.component.ts</p>
+<p>每当从警告 service 接收到消息时，警告组件都会将警告消息传递给模板，它通过订阅警告 service 的getMessage() 方法来返回一个 Observable</p>
+<pre><code class="lang-typescript">import { Component, OnInit } from &#39;@angular/core&#39;;
+import { AlertService } from &#39;../_services/index&#39;; 
+@Component({
+    moduleId: module.id,
+    selector: &#39;alert&#39;,
+    templateUrl: &#39;alert.component.html&#39;
+})
+export class AlertComponent {
+    message: any;
+    constructor(private alertService: AlertService) { }
+    ngOnInit() {
+        this.alertService.getMessage().subscribe(message =&gt; { this.message = message; });
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 权限守护</h3>
+<p>路径：/app/_guards/auth.guard.ts</p>
+<p>进程守护用来限制那些未经允许的访问者访问有权限限制的路由，在示例中，它用来在 app.routing.ts 中</p>
+<p>保护首页路由，更多关于 Angular 守护的信息，你可以通过查看 thoughtram blog 中的 <a href="http://blog.thoughtram.io/angular/2016/07/18/guards-in-angular-2.html">一篇文章</a> 来了解</p>
+<pre><code class="lang-typescript">import { Injectable } from &#39;@angular/core&#39;;
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from &#39;@angular/router&#39;;
+@Injectable()
+export class AuthGuard implements CanActivate {
+    constructor(private router: Router) { }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (localStorage.getItem(&#39;currentUser&#39;)) {
+            // 有登录，返回
+            return true;
+        } 
+        // 没有登录，则跳转到登录页面。
+        this.router.navigate([&#39;/login&#39;], { queryParams: { returnUrl: state.url }});
+        return false;
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 伪造后端提供商</h3>
+<p>路径：/app/_helpers/fake-backend.ts</p>
+<p>假的后端提供商可以让示例在没有后端的情况下运行，它使用 HTML5 本地存储来存储用户数据，并且提供假的权限实现和 CRUD (增删改查) 方法，在生产阶段，这些将交由真实的接口和数据库来实现。</p>
+<p>使用 Angular 模拟后端来替换掉默认的 http 请求的后端服务，模拟后端通过拦截应用中的 http 请求提供假的响应，它仍然用来做单元测试。</p>
+<pre><code class="lang-typescript">import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHRBackend, RequestOptions } from &#39;@angular/http&#39;;
+import { MockBackend, MockConnection } from &#39;@angular/http/testing&#39;;
+export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOptions, realBackend: XHRBackend) {
+    // 存储中本地存储中注册用户数据
+    let users: any[] = JSON.parse(localStorage.getItem(&#39;users&#39;)) || [];
+    // 配置模拟后端
+    backend.connections.subscribe((connection: MockConnection) =&gt; {
+          // 包装超时以模拟服务器api调用
+        setTimeout(() =&gt; {
+            // 权限
+            if (connection.request.url.endsWith(&#39;/api/authenticate&#39;) &amp;&amp; connection.request.method === RequestMethod.Post) {
+                // 从POST请求中获取请求的参数get parameters from post request
+                let params = JSON.parse(connection.request.getBody());
+                // 查找用户是否有登录凭据find if any user matches login credentials
+                let filteredUsers = users.filter(user =&gt; {
+                    return user.username === params.username &amp;&amp; user.password === params.password;
+                });
+                if (filteredUsers.length) {
+                    // 如果用户信息存在，返回200成功并且返回用户信息和伪造JWT令牌
+                    let user = filteredUsers[0];
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body: {
+                            id: user.id,
+                            username: user.username,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            token: &#39;fake-jwt-token&#39;
+                        }
+                    })));
+                } else {
+                    // 或者返回400错误请求
+                    connection.mockError(new Error(&#39;Username or password is incorrect&#39;));
+                }
+                return;
+            }
+            // 获取用户get users
+            if (connection.request.url.endsWith(&#39;/api/users&#39;) &amp;&amp; connection.request.method === RequestMethod.Get) {
+                //检查请求头部的权限令牌并且返回用户是否有效，在真实运行环境中，这部分是在服务端安全执行的。 
+                if (connection.request.headers.get(&#39;Authorization&#39;) === &#39;Bearer fake-jwt-token&#39;) {
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: users })));
+                } else {
+                    // 返回401不允许访问，如果令牌为空或者无效
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
+                }
+                return;
+            }
+            // 通过ID查找用户get user by id
+            if (connection.request.url.match(/\/api\/users\/\d+$/) &amp;&amp; connection.request.method === RequestMethod.Get) {
+                //检查请求头部的权限令牌并且返回用户是否有效，在真实运行环境中，这部分是在服务端安全执行的。 
+                if (connection.request.headers.get(&#39;Authorization&#39;) === &#39;Bearer fake-jwt-token&#39;) {
+                    // 在用户数据中根据ID查找用户
+                    let urlParts = connection.request.url.split(&#39;/&#39;);
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matchedUsers = users.filter(user =&gt; { return user.id === id; });
+                    let user = matchedUsers.length ? matchedUsers[0] : null;
+
+                    // 200成功响应并返回用户信息
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: user })));
+                } else {
+                    // 返回401不允许访问，如果令牌不存在或者失效
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
+                }
+                return;
+            }
+            // 创建用户
+            if (connection.request.url.endsWith(&#39;/api/users&#39;) &amp;&amp; connection.request.method === RequestMethod.Post) {
+                // 从POST的数据中获取用户对象数据
+                let newUser = JSON.parse(connection.request.getBody());
+                // 验证
+                let duplicateUser = users.filter(user =&gt; { return user.username === newUser.username; }).length;
+                if (duplicateUser) {
+                    return connection.mockError(new Error(&#39;Username &quot;&#39; + newUser.username + &#39;&quot; is already taken&#39;));
+                }
+                // 保存新用户
+                newUser.id = users.length + 1;
+                users.push(newUser);
+                localStorage.setItem(&#39;users&#39;, JSON.stringify(users));
+                // 返回200成功信息
+                connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                return;
+            }
+            // 删除用户
+            if (connection.request.url.match(/\/api\/users\/\d+$/) &amp;&amp; connection.request.method === RequestMethod.Delete) {
+                // 检查请求头部的权限令牌并且返回用户是否有效，在真实运行环境中，这部分是在服务端安全执行的。 
+                if (connection.request.headers.get(&#39;Authorization&#39;) === &#39;Bearer fake-jwt-token&#39;) {
+                    // 在用户信息中通过ID查找用户
+                    let urlParts = connection.request.url.split(&#39;/&#39;);
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i &lt; users.length; i++) {
+                        let user = users[i];
+                        if (user.id === id) {
+                            // 删除用户
+                            users.splice(i, 1);
+                            localStorage.setItem(&#39;users&#39;, JSON.stringify(users));
+                            break;
+                        }
+                    }
+                    // respond 200 OK
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    connection.mockRespond(new Response(new ResponseOptions({ status: 401 })));
+                }
+                return;
+            }
+            // pass through any requests not handled above
+            let realHttp = new Http(realBackend, options);
+            let requestOptions = new RequestOptions({
+                method: connection.request.method,
+                headers: connection.request.headers,
+                body: connection.request.getBody(),
+                url: connection.request.url,
+                withCredentials: connection.request.withCredentials,
+                responseType: connection.request.responseType
+            });
+            realHttp.request(connection.request.url, requestOptions)
+                .subscribe((response: Response) =&gt; {
+                    connection.mockRespond(response);
+                },
+                (error: any) =&gt; {
+                    connection.mockError(error);
+                });
+        }, 500);
+    });
+    return new Http(backend, options);
+};
+
+export let fakeBackendProvider = {
+    // use fake backend in place of Http service for backend-less development
+    provide: Http,
+    useFactory: fakeBackendFactory,
+    deps: [MockBackend, BaseRequestOptions, XHRBackend]
+};
+</code></pre>
+<h3 id="angular-">Angular 用户模型</h3>
+<p>路径：/app/_models/user.ts</p>
+<p>用户模型是一个定义了用户属性的小类</p>
+<pre><code class="lang-typescript">export class User {
+    id: number;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+}
+</code></pre>
+<h3 id="angular-">Angular 警告服务</h3>
+<p>路径：/app/_services/alert.service.ts</p>
+<p>警告服务让应用中的任何组件都可以通过使用警告组件在页面顶部显示警告信息。</p>
+<p>服务有显示成功和错误消息的方法，并且 getMessage() 方法返回一个可观察对象，用来订阅通知，每当警告组件显示一条消息时。</p>
+<pre><code class="lang-typescript">import { Injectable } from &#39;@angular/core&#39;;
+import { Router, NavigationStart } from &#39;@angular/router&#39;;
+import { Observable } from &#39;rxjs&#39;;
+import { Subject } from &#39;rxjs/Subject&#39;;
+@Injectable()
+export class AlertService {
+    private subject = new Subject&lt;any&gt;();
+    private keepAfterNavigationChange = false;
+    constructor(private router: Router) {
+        // 清除警告消息在路由改变时
+        router.events.subscribe(event =&gt; {
+            if (event instanceof NavigationStart) {
+                if (this.keepAfterNavigationChange) {
+                    // 只保留一个位置的变化
+                    this.keepAfterNavigationChange = false;
+                } else {
+                    // 清除警告
+                    this.subject.next();
+                }
+            }
+        });
+    }
+    success(message: string, keepAfterNavigationChange = false) {
+        this.keepAfterNavigationChange = keepAfterNavigationChange;
+        this.subject.next({ type: &#39;success&#39;, text: message });
+    }
+    error(message: string, keepAfterNavigationChange = false) {
+        this.keepAfterNavigationChange = keepAfterNavigationChange;
+        this.subject.next({ type: &#39;error&#39;, text: message });
+    }
+    getMessage(): Observable&lt;any&gt; {
+        return this.subject.asObservable();
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 权限服务</h3>
+<p>路径：/app/_services/authentication.service.ts</p>
+<p>权限服务用来在应用中登录和登出，发送用户凭据到接口并且检查 JWT 令牌的响应，如果存在就意味着权限许可成功，并且把用户信息中的令牌信息保存到本地存储中。</p>
+<p>登录的用户详细信息存储在本地存储中，以便用户在刷新浏览器以及浏览器会话之前将保持登录状态，直到注销。 如果您不希望用户在刷新或会话之间保持登录，则可以通过将用户详细信息存储在较不持久的位置（如会话存储）或认证服务的属性中来轻松更改行为。</p>
+<pre><code class="lang-typescript">import { Injectable } from &#39;@angular/core&#39;;
+import { Http, Headers, Response } from &#39;@angular/http&#39;;
+import { Observable } from &#39;rxjs/Observable&#39;;
+import &#39;rxjs/add/operator/map&#39;
+@Injectable()
+export class AuthenticationService {
+    constructor(private http: Http) { }
+    login(username: string, password: string) {
+        return this.http.post(&#39;/api/authenticate&#39;, JSON.stringify({ username: username, password: password }))
+            .map((response: Response) =&gt; {
+                // login successful if there&#39;s a jwt token in the response
+                let user = response.json();
+                if (user &amp;&amp; user.token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem(&#39;currentUser&#39;, JSON.stringify(user));
+                }
+            });
+    }
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem(&#39;currentUser&#39;);
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 用户服务</h3>
+<p>用户服务包含标准的增删改查方法集合来管理用户，它包含一个 jwt() 方法，用来添加 JWT 令牌从本地存储到每个http 请求的头信息的 Authorization字段中</p>
+<pre><code class="lang-typescript">import { Injectable } from &#39;@angular/core&#39;;
+import { Http, Headers, RequestOptions, Response } from &#39;@angular/http&#39;;
+import { User } from &#39;../_models/index&#39;;
+@Injectable()
+export class UserService {
+    constructor(private http: Http) {}
+    getAll() {
+        return this.http.get(&#39;/api/users&#39;, this.jwt()).map((response: Response) =&gt; response.json());
+    }
+    getById(id: number) {
+        return this.http.get(&#39;/api/users/&#39; + id, this.jwt()).map((response: Response) =&gt; response.json());
+    }
+    create(user: User) {
+        return this.http.post(&#39;/api/users&#39;, user, this.jwt()).map((response: Response) =&gt; response.json());
+    }
+    update(user: User) {
+        return this.http.put(&#39;/api/users/&#39; + user.id, user, this.jwt()).map((response: Response) =&gt; response.json());
+    }
+    delete(id: number) {
+        return this.http.delete(&#39;/api/users/&#39; + id, this.jwt()).map((response: Response) =&gt; response.json());
+    } 
+    // private helper methods
+    private jwt() {
+        // create authorization header with jwt token
+        let currentUser = JSON.parse(localStorage.getItem(&#39;currentUser&#39;));
+        if (currentUser &amp;&amp; currentUser.token) {
+            let headers = new Headers({ &#39;Authorization&#39;: &#39;Bearer &#39; + currentUser.token });
+            return new RequestOptions({ headers: headers });
+        }
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 首页组件模板</h3>
+<p>路径：/app/home/home.component.html</p>
+<p>首页组件里包含 html 以及 angular 模板语法 ，用于展示一个简单的欢乐信息，用户列表和拿出链接</p>
+<pre><code class="lang-typescript">&lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;
+    &lt;h1&gt;Hi {{currentUser.firstName}}!&lt;/h1&gt;
+    &lt;p&gt;You&#39;re logged in with Angular 2!!&lt;/p&gt;
+    &lt;h3&gt;All registered users:&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li *ngFor=&quot;let user of users&quot;&gt;
+            {{user.username}} ({{user.firstName}} {{user.lastName}})
+            - &lt;a (click)=&quot;deleteUser(user.id)&quot;&gt;Delete&lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;&lt;a [routerLink]=&quot;[&#39;/login&#39;]&quot;&gt;Logout&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="angular-">Angular 首页组件</h3>
+<p>路径：/app/home/home.component.ts</p>
+<p>首页组件从本地存储里获取当前用户，从用户服务里获取所有用户，并且展示在模板中。</p>
+<pre><code class="lang-typescript">import { Component, OnInit } from &#39;@angular/core&#39;;
+import { User } from &#39;../_models/index&#39;;
+import { UserService } from &#39;../_services/index&#39;;
+@Component({
+    moduleId: module.id,
+    templateUrl: &#39;home.component.html&#39;
+}) 
+export class HomeComponent implements OnInit {
+    currentUser: User;
+    users: User[] = []; 
+    constructor(private userService: UserService) {
+        this.currentUser = JSON.parse(localStorage.getItem(&#39;currentUser&#39;));
+    }
+    ngOnInit() {
+        this.loadAllUsers();
+    }
+    deleteUser(id: number) {
+        this.userService.delete(id).subscribe(() =&gt; { this.loadAllUsers() });
+    }
+    private loadAllUsers() {
+        this.userService.getAll().subscribe(users =&gt; { this.users = users; });
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 登录组件模板</h3>
+<p>路径：/app/login/login.component.html</p>
+<p>登录组件模板包含一个带有用户名和密码的登录表单，当提交按钮点击时，无效的字段会有相应的验证消息提醒，</p>
+<p>提交的 Login() 方法会在表单有效时被调用。</p>
+<pre><code class="lang-typescript">&lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;
+    &lt;h2&gt;Login&lt;/h2&gt;
+    &lt;form name=&quot;form&quot; (ngSubmit)=&quot;f.form.valid &amp;&amp; login()&quot; #f=&quot;ngForm&quot; novalidate&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !username.valid }&quot;&gt;
+            &lt;label for=&quot;username&quot;&gt;Username&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;username&quot; [(ngModel)]=&quot;model.username&quot; #username=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !username.valid&quot; class=&quot;help-block&quot;&gt;Username is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !password.valid }&quot;&gt;
+            &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; name=&quot;password&quot; [(ngModel)]=&quot;model.password&quot; #password=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !password.valid&quot; class=&quot;help-block&quot;&gt;Password is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;button [disabled]=&quot;loading&quot; class=&quot;btn btn-primary&quot;&gt;Login&lt;/button&gt;
+            &lt;img *ngIf=&quot;loading&quot; src=&quot;data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==&quot; /&gt;
+            &lt;a [routerLink]=&quot;[&#39;/register&#39;]&quot; class=&quot;btn btn-link&quot;&gt;Register&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="angular-">Angular 登录组件</h3>
+<p>路径：/app/login/login.component.ts</p>
+<p>登录组件使用权限服务登录和登出应用，它在初始化时自动记录用户（ngOnInit），因此登录页面也可以用于登出。</p>
+<pre><code class="lang-typescript">import { Component, OnInit } from &#39;@angular/core&#39;;
+import { Router, ActivatedRoute } from &#39;@angular/router&#39;;
+import { AlertService, AuthenticationService } from &#39;../_services/index&#39;;
+@Component({
+    moduleId: module.id,
+    templateUrl: &#39;login.component.html&#39;
+})
+export class LoginComponent implements OnInit {
+    model: any = {};
+    loading = false;
+    returnUrl: string;
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) { }
+    ngOnInit() {
+        // reset login status
+        this.authenticationService.logout();
+        // get return url from route parameters or default to &#39;/&#39;
+        this.returnUrl = this.route.snapshot.queryParams[&#39;returnUrl&#39;] || &#39;/&#39;;
+    }
+    login() {
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .subscribe(
+                data =&gt; {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error =&gt; {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 注册组件模板</h3>
+<p>注册组件模板包含一个简单的注册表单，其中包含名字，姓氏，用户名和密码的字段。当单击提交按钮时，它会显示无效字段的验证消息。如果表单有效，则提交 register() 方法。</p>
+<pre><code class="lang-typescript">&lt;div class=&quot;col-md-6 col-md-offset-3&quot;&gt;
+    &lt;h2&gt;Register&lt;/h2&gt;
+    &lt;form name=&quot;form&quot; (ngSubmit)=&quot;f.form.valid &amp;&amp; register()&quot; #f=&quot;ngForm&quot; novalidate&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !username.valid }&quot;&gt;
+            &lt;label for=&quot;firstName&quot;&gt;First Name&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;firstName&quot; [(ngModel)]=&quot;model.firstName&quot; #firstName=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !firstName.valid&quot; class=&quot;help-block&quot;&gt;First Name is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !username.valid }&quot;&gt;
+            &lt;label for=&quot;lastName&quot;&gt;Last Name&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;lastName&quot; [(ngModel)]=&quot;model.lastName&quot; #lastName=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !lastName.valid&quot; class=&quot;help-block&quot;&gt;Last Name is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !username.valid }&quot;&gt;
+            &lt;label for=&quot;username&quot;&gt;Username&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;username&quot; [(ngModel)]=&quot;model.username&quot; #username=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !username.valid&quot; class=&quot;help-block&quot;&gt;Username is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot; [ngClass]=&quot;{ &#39;has-error&#39;: f.submitted &amp;&amp; !password.valid }&quot;&gt;
+            &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
+            &lt;input type=&quot;password&quot; class=&quot;form-control&quot; name=&quot;password&quot; [(ngModel)]=&quot;model.password&quot; #password=&quot;ngModel&quot; required /&gt;
+            &lt;div *ngIf=&quot;f.submitted &amp;&amp; !password.valid&quot; class=&quot;help-block&quot;&gt;Password is required&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;button [disabled]=&quot;loading&quot; class=&quot;btn btn-primary&quot;&gt;Register&lt;/button&gt;
+            &lt;img *ngIf=&quot;loading&quot; src=&quot;data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==&quot; /&gt;
+            &lt;a [routerLink]=&quot;[&#39;/login&#39;]&quot; class=&quot;btn btn-link&quot;&gt;Cancel&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="angular-">Angular 注册组件</h3>
+<p>路径：/app/register/register.component.ts</p>
+<p>注册组件有一个 register() 方法，在注册表单提交时通过调用用户服务用来创建新用户。</p>
+<pre><code class="lang-typescript">import { Component } from &#39;@angular/core&#39;;
+import { Router } from &#39;@angular/router&#39;;
+import { AlertService, UserService } from &#39;../_services/index&#39;;
+@Component({
+    moduleId: module.id,
+    templateUrl: &#39;register.component.html&#39;
+}) 
+export class RegisterComponent {
+    model: any = {};
+    loading = false;
+    constructor(
+        private router: Router,
+        private userService: UserService,
+        private alertService: AlertService) { }
+    register() {
+        this.loading = true;
+        this.userService.create(this.model)
+            .subscribe(
+                data =&gt; {
+                    // set success message and pass true paramater to persist the message after redirecting to the login page
+                    this.alertService.success(&#39;Registration successful&#39;, true);
+                    this.router.navigate([&#39;/login&#39;]);
+                },
+                error =&gt; {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+}
+</code></pre>
+<h3 id="angular-">Angular 应用组件模板</h3>
+<p>路径：/app/app.component.html</p>
+<p>应用组件模板是一个应用的根组件模板，它包含了一个路由指令 router-outlet , 目的是为了展示每个当前路由的视图，并且在系统中展示警告信息中警告指令 alert</p>
+<pre><code class="lang-typescript">&lt;div class=&quot;jumbotron&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;col-sm-8 col-sm-offset-2&quot;&gt;
+            &lt;alert&gt;&lt;/alert&gt;
+            &lt;router-outlet&gt;&lt;/router-outlet&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="angular-">Angular 应用组件</h3>
+<p>路径：/app/app.comonent.ts</p>
+<p>应用组件是应用程序的根组件，它将应用程序的根标记定义为具有选择器属性的<app> &lt;/ app&gt;。 将moduleId属性设置为允许将相对路径用于templateUrl</p>
+<pre><code class="lang-typescript">import { Component } from &#39;@angular/core&#39;;
+@Component({
+    moduleId: module.id,
+    selector: &#39;app&#39;,
+    templateUrl: &#39;app.component.html&#39;
+})
+export class AppComponent {}
+</code></pre>
+<h3 id="angular-">Angular 应用模块</h3>
+<p>路径：/app/app.module.ts</p>
+<p>应用模块定义了应用的根模块，并且定义了关于模块的元数据，更多关于 Angular 模块的信息可以查看官方文档<a href="https://angular.io/docs/ts/latest/guide/ngmodule.html">这个页面</a></p>
+<p>这是伪造的后端提供商添加到应用程序的地方，如果切换到一个真实的后端，只需删除位于注释“//提供者用于创建伪造后端”下的提供者</p>
+<pre><code class="lang-typescript">import { NgModule }      from &#39;@angular/core&#39;;
+import { BrowserModule } from &#39;@angular/platform-browser&#39;;
+import { FormsModule }    from &#39;@angular/forms&#39;;
+import { HttpModule } from &#39;@angular/http&#39;;
+// 用来创建伪造的后端
+import { fakeBackendProvider } from &#39;./_helpers/index&#39;;
+import { MockBackend, MockConnection } from &#39;@angular/http/testing&#39;;
+import { BaseRequestOptions } from &#39;@angular/http&#39;;
+import { AppComponent }  from &#39;./app.component&#39;;
+import { routing }        from &#39;./app.routing&#39;;
+import { AlertComponent } from &#39;./_directives/index&#39;;
+import { AuthGuard } from &#39;./_guards/index&#39;;
+import { AlertService, AuthenticationService, UserService } from &#39;./_services/index&#39;;
+import { HomeComponent } from &#39;./home/index&#39;;
+import { LoginComponent } from &#39;./login/index&#39;;
+import { RegisterComponent } from &#39;./register/index&#39;; 
+@NgModule({
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent
+    ],
+    providers: [
+        AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+        // 提供者用于创建伪造后端
+        fakeBackendProvider,
+        MockBackend,
+        BaseRequestOptions
+    ],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
+</code></pre>
+<h3 id="angular-">Angular 应用路由</h3>
+<p>路径：/app/app.routing.ts</p>
+<p>文件定义了应用的路由，每个路由包含一个路径和相关组件，首页路由通过添加路由的权限守护的 canActivate属性来保证访问性安全</p>
+<pre><code class="lang-typescript">import { Routes, RouterModule } from &#39;@angular/router&#39;;
+import { HomeComponent } from &#39;./home/index&#39;;
+import { LoginComponent } from &#39;./login/index&#39;;
+import { RegisterComponent } from &#39;./register/index&#39;;
+import { AuthGuard } from &#39;./_guards/index&#39;;
+const appRoutes: Routes = [
+    { path: &#39;&#39;, component: HomeComponent, canActivate: [AuthGuard] },
+    { path: &#39;login&#39;, component: LoginComponent },
+    { path: &#39;register&#39;, component: RegisterComponent },
+    // 其它路由均跳转到首页
+    { path: &#39;**&#39;, redirectTo: &#39;&#39; }
+];
+
+export const routing = RouterModule.forRoot(appRoutes);
+</code></pre>
+<h3 id="angular-">Angular 主启动文件</h3>
+<p>路径：/app/main.ts</p>
+<p>主文件是通过 Angular 启动和引导应用程序使用的入口点</p>
+<pre><code class="lang-typescript">import { platformBrowserDynamic } from &#39;@angular/platform-browser-dynamic&#39;; 
+import { AppModule } from &#39;./app.module&#39;;
+platformBrowserDynamic().bootstrapModule(AppModule);
+</code></pre>
+<blockquote>
+<p>个人原创翻译，转载请注明作者：TERRILLTANG </p>
+<p>原文地址：<a href="http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial">http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial</a></p>
+</blockquote>
