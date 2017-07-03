@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TERRILLTANG'S BLOG</title>
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Space+Mono|Ubuntu+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Space+Mono|Ubuntu+Mono|Oxygen" rel="stylesheet">
   <link rel="stylesheet" href="./vendor/style.css">
 </head>
 
@@ -15,14 +15,14 @@
     <aside v-bind:class='{show:showMenu}'>
       <h1>Article Links</h1>
       <router-link to="/[译] Angular 路由动画教程.html">[译] Angular 路由动画教程</router-link>
-      <router-link to="/[译] 在 Angular 中使用 HammerJS (触措手势).html">[译] 在 Angular 中使用 HammerJS (触措手势)</router-link>
+      <router-link to="/[译] 在 Angular 中使用 HammerJS (触摸手势).html">[译] 在 Angular 中使用 HammerJS (触摸手势)</router-link>
     </aside>
     <section>
       <nav>
         <a href="#" @click='toggleMenu($event)'>Menu</a>
         <router-link to="/">Home</router-link>
-        <router-link to="/about">About ME</router-link>
-        <a href="https://github.com/terrilltang/terrilltang.github.io">Contact or Star</a>
+        <router-link to="/about">About me</router-link>
+        <a href="https://github.com/terrilltang/terrilltang.github.io">Contact</a>
       </nav>
       <router-view></router-view>
     </section>

@@ -1,6 +1,6 @@
 var Article = {
   template: `<article>
-      <span v-if="loading">{{loading}}</span>
+      <span v-if="loading">loading...</span>
       <h1>{{$route.params.id}}</h1>
       <detail v-if="post" v-html="post" class="markdown"></detail>
     </article>`,
@@ -71,7 +71,7 @@ var router = new VueRouter({
 
 var app = new Vue({
   data: {
-    showMenu: true
+    showMenu: false
   },
   methods: {
     toggleMenu(event) {

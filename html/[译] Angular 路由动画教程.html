@@ -37,7 +37,7 @@ export class AppModule{}
 <p>第二个导入使 BrowserAnimationsModule 中的方法可以在包含在 AppModule 中的其它组件中使用</p>
 <h3 id="-angular-">定义你的 Angular 动画</h3>
 <p>Animations 可以被直接定义在你的组件里，但我更喜欢把它们分离出来到它们自己的文件中，这样可以让这些动画在多处重用，并且可以使得你的组件代码更加清晰，更加易于维护和关注点分离。</p>
-<p>在这个例子了中，我把动画放在了 app/<em>animations 文件夹中，我偏爱为无特征的文件夹加一个下划线前缀 [&quot; </em> &quot;],目的是为了和那些特征性文件夹在最顶级目录做区分，特征文件夹用来存放应用的视图或者路由代码，像首页和产品页，无特征文件夹包含那些共享重用的代码，像 services, animations, directives, css等基本一切代码。</p>
+<p>在这个例子了中，我把动画放在了 app/_animations 文件夹中，我偏爱为无特征的文件夹加一个下划线前缀,目的是为了和那些特征性文件夹在最顶级目录做区分，特征文件夹用来存放应用的视图或者路由代码，像首页和产品页，无特征文件夹包含那些共享重用的代码，像 services, animations, directives, css等基本一切代码。</p>
 <h3 id="angular-">Angular 淡入动画</h3>
 <p>在示例中，淡入动画被用于主页组件和产品列表组件</p>
 <pre><code class="lang-typescript">//从angular animations module 导入需要的动画方法

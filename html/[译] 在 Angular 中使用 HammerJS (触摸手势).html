@@ -2,14 +2,14 @@
 <p>HammerJS 是一个为 web 应用添加触摸手势的非常受欢迎的库,文中,将看到 Angular 结合 HammerJS 一起使用是多么的简单</p>
 </blockquote>
 <p><em>原文示例是针对 Angular 2 版本,经过测试,在目前最新的 Angular 4.x 版本中此教程依然适用,文章将以 Angular 来统一代称 Angular 2.x ,Angular 4.x 版本</em></p>
-<p><strong>名词</strong></p>
+<h3 id="-">名词</h3>
 <p>swipe: 滑动; 和 pan 类似,但滑动更快速,无粘滞.</p>
 <p>swipeleft,swiperight,swipeup,swipedown: 左滑,右滑,上滑,下滑</p>
 <p>carousel of avatars: 头像轮播</p>
-<p><strong>简介</strong></p>
+<h3 id="-">简介</h3>
 <p>我们将构建一个头像轮播,可以左滑或者右滑来查看每个头像,可以使用下面的地址测试一下(最好在手机上,但也可以通过 chrome 和 firefox 桌面浏览器来模拟手机测试)</p>
 <p><a href="https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview">https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview</a></p>
-<p><strong>应用配置</strong></p>
+<h3 id="-">应用配置</h3>
 <p>让我们看一下我们的目录结构是怎样的,我们有一个 app 目录文件夹,目录下包含了我们的头像切换和启动应用的 main.ts 文件</p>
 <pre><code class="lang-typescript">|- app/
     |- app.component.html
@@ -20,7 +20,7 @@
 |- index.html
 |- tsconfig.json
 </code></pre>
-<p><strong>APP 组件</strong></p>
+<h3 id="app-">APP 组件</h3>
 <p>让我们从 app 组件开始,在这个组件里,我们将定义头像列表和处理头像显示和隐藏的 swipe 事件.</p>
 <pre><code class="lang-typescript">// app/app.component.ts
 import { Component } from &#39;@angular/core&#39;;
@@ -84,7 +84,7 @@ export class AppComponent {
     }
 }
 </code></pre>
-<p><strong>笔记: </strong></p>
+<h3 id="-">笔记:</h3>
 <ol>
 <li>我们处理左滑右滑事件用同样的函数 swipe</li>
 <li><p>swipe 有两个参数</p>
@@ -100,7 +100,7 @@ export class AppComponent {
 <li><p>我们在 HTML 视图中调用 SWIPE 动作</p>
 </li>
 </ol>
-<p><strong>HTML VIEW</strong></p>
+<h3 id="html-view">HTML VIEW</h3>
 <pre><code class="lang-html">&lt;!-- app/app.component.html --&gt;
 &lt;div&gt;
     &lt;h4&gt;Swipe Avatars with HammerJS&lt;/h4&gt;
@@ -119,11 +119,10 @@ export class AppComponent {
     &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<p><strong>笔记: </strong></p>
+<h3 id="-">笔记:</h3>
 <ol>
-<li>通过 *ngFor 指令循环出每个头像,声明一个本地变量 idx 持有当前画像的索引.</li>
-</ol>
-<ol>
+<li><p>通过 *ngFor 指令循环出每个头像,声明一个本地变量 idx 持有当前画像的索引.</p>
+</li>
 <li><p>然后,开始处理 swipeleft,swiperight 事件,调用之前声明的 swipe 方法</p>
 </li>
 <li><p>$event 是一个事件对象,我们不需要知道整个 $event 对象的信息,只需要知道 $event.type 返回的字符串是 swipeleft 还是 swiperight</p>
@@ -131,7 +130,7 @@ export class AppComponent {
 <li><p>根据 avatar.visible 添加或者移除两个 CSS 类 [class.visible] 或者 [class.hidden] </p>
 </li>
 </ol>
-<p><strong>组件样式</strong></p>
+<h3 id="-">组件样式</h3>
 <p>可以使用 semantic-ui 轻松实现样式美化,但对于我们来讲是不必要的,跳过这个部分,下面是需要添加到组件中的自定义 CSS 类</p>
 <pre><code class="lang-css">.swipe-box {
     display: block;
@@ -148,14 +147,14 @@ export class AppComponent {
     display: none;
 }
 </code></pre>
-<p><strong>笔记:</strong> </p>
+<h3 id="-">笔记:</h3>
 <ol>
 <li><p>需要所有的画像堆在其它的最上方,因此,使用 .swipe-box 使所有画像浮动</p>
 </li>
 <li><p>.visible 和 .hidden 用来隐藏和显示画像卡</p>
 </li>
 </ol>
-<p><strong>引入 HammerJS 脚本</strong></p>
+<h3 id="-hammerjs-">引入 HammerJS 脚本</h3>
 <p>现在已经完成了组件,开始设置 HammerJS , 首先,需要把 HammerJS 脚本文件引入到主视图文件 index.html 文件中</p>
 <pre><code class="lang-html">&lt;!-- index.html --&gt;
 &lt;head&gt;
@@ -183,7 +182,7 @@ export class AppComponent {
 </code></pre>
 <p>然后,在项目中引入JS 文件</p>
 <p><em>如果没有引入  HammerJS file ,会有一个错误信息抛出: &#39;Hammer.js is not loaded,can not bind swipeleft event&#39;.</em></p>
-<p><strong>应用程序模块</strong></p>
+<h3 id="-">应用程序模块</h3>
 <p>默认情况,如果没有任何自定义配置,就可以直接使用 HammerJS ,Angular 支持 HammerJS 开箱即用,在应用启动时,不需要包含任何内容,您的应用程序模块看起来像下面这样</p>
 <pre><code class="lang-typescript">// app.module.ts
 
@@ -201,9 +200,9 @@ import { AppComponent }   from &#39;./app.component&#39;;
 
 export class AppModule { }
 </code></pre>
-<p><strong>定制 HammerJS</strong></p>
+<h3 id="-hammerjs">定制 HammerJS</h3>
 <p>如果你想增加一些自定义设置,像速度和阀值什么的,要怎么做呢?</p>
-<p><strong>快速说明</strong></p>
+<h3 id="-">快速说明</h3>
 <ol>
 <li><p>threshold (阀值): 识别 swipe 手势的最小距离值,默认: 10</p>
 </li>
@@ -241,10 +240,10 @@ export class AppModule { }
 </code></pre>
 <p>在示例中,仅是想为 swipe 行为重写一些默认配置,如果想有更多的控制,可以像上面那样实现 HammerGestureConfig 类</p>
 <p>查看一下 HammerGestureConfig 没那么复杂的源码或者文档,整个类仅有两个属性( events,overrides) 和一个方法( buildHammer )</p>
-<p><strong>总结:</strong> </p>
+<h3 id="-">总结:</h3>
 <p>Angular 与 HammerJS 集成以实现触摸手势事件检测非常容易.</p>
 <blockquote>
-<p>原文地址: <a href="https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2">https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2</a>
-HammerJS swipe 配置文档: <a href="https://hammerjs.github.io/recognizer-swipe/">https://hammerjs.github.io/recognizer-swipe/</a>
-示例运行地址: <a href="https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview">https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview</a></p>
+<p>原文地址: <a href="https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2">https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2</a></p>
+<p>HammerJS swipe 配置文档: <a href="https://hammerjs.github.io/recognizer-swipe/">https://hammerjs.github.io/recognizer-swipe/</a></p>
+<p>示例运行地址: <a href="https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview">https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview</a></p>
 </blockquote>

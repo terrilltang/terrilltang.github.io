@@ -5,7 +5,7 @@
 
 
 
-**名词**
+### 名词
 
 swipe: 滑动; 和 pan 类似,但滑动更快速,无粘滞.
 
@@ -13,7 +13,7 @@ swipeleft,swiperight,swipeup,swipedown: 左滑,右滑,上滑,下滑
 
 carousel of avatars: 头像轮播
 
-**简介**
+### 简介
 
 我们将构建一个头像轮播,可以左滑或者右滑来查看每个头像,可以使用下面的地址测试一下(最好在手机上,但也可以通过 chrome 和 firefox 桌面浏览器来模拟手机测试)
 
@@ -21,7 +21,7 @@ https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview
 
 
 
-**应用配置**
+### 应用配置
 
 让我们看一下我们的目录结构是怎样的,我们有一个 app 目录文件夹,目录下包含了我们的头像切换和启动应用的 main.ts 文件
 
@@ -37,7 +37,7 @@ https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview
 ```
 
 
-**APP 组件**
+### APP 组件
 
 让我们从 app 组件开始,在这个组件里,我们将定义头像列表和处理头像显示和隐藏的 swipe 事件.
 ```typescript
@@ -103,7 +103,7 @@ export class AppComponent {
     }
 }
 ```
-**笔记: **
+### 笔记: 
 
 1. 我们处理左滑右滑事件用同样的函数 swipe
 2. swipe 有两个参数
@@ -119,7 +119,7 @@ export class AppComponent {
 
 
 
-**HTML VIEW**
+### HTML VIEW
 
 ```html
 <!-- app/app.component.html -->
@@ -141,10 +141,9 @@ export class AppComponent {
 </div>
 ```
 
-**笔记: **
+### 笔记:
 
 1. 通过 *ngFor 指令循环出每个头像,声明一个本地变量 idx 持有当前画像的索引.
-
 
 2. 然后,开始处理 swipeleft,swiperight 事件,调用之前声明的 swipe 方法
 
@@ -154,7 +153,7 @@ export class AppComponent {
 
 
 
-**组件样式**
+### 组件样式
 
 可以使用 semantic-ui 轻松实现样式美化,但对于我们来讲是不必要的,跳过这个部分,下面是需要添加到组件中的自定义 CSS 类
 
@@ -176,7 +175,7 @@ export class AppComponent {
 
 ```
 
-**笔记:** 
+### 笔记:
 
 1. 需要所有的画像堆在其它的最上方,因此,使用 .swipe-box 使所有画像浮动
 
@@ -185,7 +184,7 @@ export class AppComponent {
 
 
 
-**引入 HammerJS 脚本**
+### 引入 HammerJS 脚本
 
 现在已经完成了组件,开始设置 HammerJS , 首先,需要把 HammerJS 脚本文件引入到主视图文件 index.html 文件中
 
@@ -228,7 +227,7 @@ export class AppComponent {
 
 
 
-**应用程序模块**
+### 应用程序模块 
 
 默认情况,如果没有任何自定义配置,就可以直接使用 HammerJS ,Angular 支持 HammerJS 开箱即用,在应用启动时,不需要包含任何内容,您的应用程序模块看起来像下面这样
 
@@ -251,11 +250,11 @@ export class AppModule { }
 ```
 
 
-**定制 HammerJS**
+### 定制 HammerJS
 
 如果你想增加一些自定义设置,像速度和阀值什么的,要怎么做呢?
 
-**快速说明**
+### 快速说明
 
 1. threshold (阀值): 识别 swipe 手势的最小距离值,默认: 10
 
@@ -302,14 +301,16 @@ export class AppModule { }
 
 
 
-**总结:** 
+### 总结:
 
 Angular 与 HammerJS 集成以实现触摸手势事件检测非常容易.
 
 
 
 > 原文地址: https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2
+
 > HammerJS swipe 配置文档: https://hammerjs.github.io/recognizer-swipe/
+
 > 示例运行地址: https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview
 
 
