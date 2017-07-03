@@ -19,8 +19,7 @@ var Article = {
   updated() {
     document.title = this.$route.params.id;
     document.querySelectorAll('pre code').forEach(function (block) {
-      console.log(block.attributes)
-      block.setAttribute('type',block.classList[0].replace('lang-',''))
+      block.parentNode.setAttribute('type', block.classList[0].replace('lang-', ''))
       hljs.highlightBlock(block);
     })
   },
@@ -79,6 +78,9 @@ var router = new VueRouter({
 var app = new Vue({
   data: {
     showMenu: false
+  },
+  updated() {
+    if (!this.$route.params.id) document.title = 'Terrill\'s Blog';
   },
   methods: {
     toggleMenu(event) {

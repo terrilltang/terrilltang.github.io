@@ -218,7 +218,7 @@ export class AppComponent {
 由于示例运行在 plunker ,示例中引用了 HammerJS CDN URI,如果想本地管理,可以运行下面的命令.
 
 ```cmd
-    npm install hammerjs --save
+npm install hammerjs --save
 ```
 
 然后,在项目中引入JS 文件
