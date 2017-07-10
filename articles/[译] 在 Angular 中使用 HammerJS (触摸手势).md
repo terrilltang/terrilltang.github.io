@@ -313,4 +313,3 @@ Angular 与 HammerJS 集成以实现触摸手势事件检测非常容易.
 
 > 示例运行地址: https://plnkr.co/edit/LCsiXOtzSedGZDbGQ3f8?p=preview
 
-

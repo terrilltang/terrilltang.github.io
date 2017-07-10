@@ -114,7 +114,29 @@ main {
     }
   }
 }
-
+code{
+  background: darken($color-background, 2%);
+  padding:2px 4px;
+  border:1px solid darken($color-background,12%);
+  border-radius:2px;
+}
+table{
+  margin:15px auto;
+  width:100%;
+  border-collapse:collapse;
+  border:none;
+  th,td{
+    text-align: left;
+    min-width:100px;
+    padding:0 8px;
+    border:1px solid darken($color-background,10%)
+  }
+  tr:nth-child(even){
+    th,td{
+      background:darken($color-background,4%);
+    }
+  }
+}
 .markdown {
   padding: 15px 0;
   display: block;
@@ -165,7 +187,6 @@ main {
   }
   pre {
     width:100%;
-    background: darken($color-background, 4%);
     margin: 15px auto;
     line-height: 1.3;
     display:block;
@@ -189,6 +210,9 @@ main {
       padding:20px;
       display:block;
       overflow-x: auto;
+      border:none;
+      border-radius:0;
+      background:darken($color-background,2%);
       color: lightness($color-foreground, 30%);
       span {
         font-family: inherit;
@@ -228,7 +252,7 @@ main {
         color: lightness($color-warn, 30%);
         font-weight: bold;
       }
-      .hljs-regexp,
+      // .hljs-regexp,
       .hljs-symbol,
       .hljs-variable,
       .hljs-template-variable,

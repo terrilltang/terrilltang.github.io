@@ -1,5 +1,3 @@
-### Angular 用户注册和登录教程和示例
-
 > 原作者的示例在Angular 2.x / 4.x 版本中都可以跑的通，所以以下文章中 Angular 代表 Angular 2.x / 4.x, AngularJS 代表 Angular 1.x;
 
 4/27/2017---为 Webpack 和 SystemJS 版本示例更新 Angular 版本到 **Angular 4.1.0**
